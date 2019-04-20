@@ -11,5 +11,10 @@ namespace DvdRentalPostgres.Data.Entities
         public string LastName { get; set; }
 
         public DateTime LastUpdate { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace DvdRentalPostgres.Data.Queries.Films
     {
         public string FilmTitle { get; set; }
 
+        public string SearchFullText { get; set; }
+
         public FilmsWithActorsCategoriesQuery(IDbTransaction transaction) 
             : base(transaction)
         {}
@@ -28,6 +30,9 @@ namespace DvdRentalPostgres.Data.Queries.Films
 
             if(!string.IsNullOrEmpty(FilmTitle))
                 builder.AddClause("f.title = @FilmTitle", new { FilmTitle });
+
+            if(!string.IsNullOrEmpty(SearchFullText))
+                builder.AddClause("f.fulltext @@ to_tsquery(@SearchFullText)", new { SearchFullText });
 
             var dic1 = new Dictionary<int, FilmsWithActorsCategories>();
             var dic2 = new Dictionary<int, Actor>();
@@ -57,13 +62,13 @@ namespace DvdRentalPostgres.Data.Queries.Films
             if (!dictResult.TryGetValue(f.FilmId, out var fwac))
             {
                 fwac = new FilmsWithActorsCategories(f);
-                dictResult[f.FilmId] = fwac;
+                dictResult.Add(f.FilmId, fwac);
             }
 
             if (!dictActors.TryGetValue(a.ActorId, out var actor))
             {
                 fwac.Actors.Add(a);
-                dictActors[a.ActorId] = a;
+                dictActors.Add(a.ActorId, a);
             }
             else
             {
@@ -73,7 +78,7 @@ namespace DvdRentalPostgres.Data.Queries.Films
             if (!dictCategories.TryGetValue(c.CategoryId, out var category))
             {
                 fwac.Categories.Add(c);
-                dictCategories[c.CategoryId] = c;
+                dictCategories.Add(c.CategoryId, c);
             }
             else
             {
