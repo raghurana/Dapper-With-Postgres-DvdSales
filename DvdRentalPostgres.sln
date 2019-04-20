@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvdRentalPostgres.Data", "DvdRentalPostgres.Data\DvdRentalPostgres.Data.csproj", "{8EA5177B-1678-4336-B42A-1631FFA23DED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvdRentalPostgres.Data.IntegTests", "DvdRentalPostgres.Data.IntegTests\DvdRentalPostgres.Data.IntegTests.csproj", "{C6F91C8F-9BC8-4549-8711-78D177D9B6BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F91C8F-9BC8-4549-8711-78D177D9B6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F91C8F-9BC8-4549-8711-78D177D9B6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F91C8F-9BC8-4549-8711-78D177D9B6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F91C8F-9BC8-4549-8711-78D177D9B6BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
