@@ -7,20 +7,22 @@ namespace DvdRentalPostgres.Data.IntegTests.Commands
     [Collection(DbTestsCollection.Name)]
     public abstract class BaseDbCommandTests : IDisposable
     {
-        protected IDbConnection Connection;
+        private IDbConnection connection;
         protected IDbTransaction OpenTransaction;
 
         protected BaseDbCommandTests(DbFixture dbFixture)
         {
-            Connection = dbFixture.DbConnectionFactory.NewConnection();
-            OpenTransaction = Connection.BeginTransaction();
+            connection = dbFixture.DbConnectionFactory.NewConnection();
+            OpenTransaction = connection.BeginTransaction();
         }
 
         public void Dispose()
         {
             OpenTransaction.Rollback();
-            Connection.Dispose();
-            Connection = null;
+            connection.Dispose();
+
+            OpenTransaction = null;
+            connection = null;
         }
     }
 }
