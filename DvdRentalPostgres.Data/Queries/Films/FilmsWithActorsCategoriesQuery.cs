@@ -29,21 +29,58 @@ namespace DvdRentalPostgres.Data.Queries.Films
             if(!string.IsNullOrEmpty(FilmTitle))
                 builder.AddClause("f.title = @FilmTitle", new { FilmTitle });
 
+            var dic1 = new Dictionary<int, FilmsWithActorsCategories>();
+            var dic2 = new Dictionary<int, Actor>();
+            var dic3 = new Dictionary<int, Category>();
+
             var result  = builder.Build();
             var records =
                 await Connection.QueryAsync<Film, Actor, Category, FilmsWithActorsCategories>(
                     result.BuiltQuery, 
-                    Map,
+                    (f, a, c) => Map(f, a, c, dic1, dic2, dic3),
                     result.BuiltParams, 
                     Transaction, 
                     splitOn: "actor_id, category_id");
 
-            return records.ToList().AsReadOnly();
+            return records.Distinct().ToList().AsReadOnly();
         }
 
-        private FilmsWithActorsCategories Map(Film f, Actor a, Category c)
+        private FilmsWithActorsCategories Map(
+            Film f, 
+            Actor a, 
+            Category c, 
+            Dictionary<int, FilmsWithActorsCategories> dictResult, 
+            Dictionary<int, Actor> dictActors, 
+            Dictionary<int, Category> dictCategories)
         {
-            return new FilmsWithActorsCategories();
+
+            if (!dictResult.TryGetValue(f.FilmId, out var fwac))
+            {
+                fwac = new FilmsWithActorsCategories(f);
+                dictResult[f.FilmId] = fwac;
+            }
+
+            if (!dictActors.TryGetValue(a.ActorId, out var actor))
+            {
+                fwac.Actors.Add(a);
+                dictActors[a.ActorId] = a;
+            }
+            else
+            {
+                fwac.Actors.Add(actor);
+            }
+
+            if (!dictCategories.TryGetValue(c.CategoryId, out var category))
+            {
+                fwac.Categories.Add(c);
+                dictCategories[c.CategoryId] = c;
+            }
+            else
+            {
+                fwac.Categories.Add(category);
+            }
+
+            return fwac;
         }
     }
 }
