@@ -5,13 +5,14 @@ using Xunit;
 
 namespace DvdRentalPostgres.Data.IntegTests.Queries
 {
+    [Collection(DbTestsCollection.Name)]
     public class ActorsQueryTests
     {
-        private readonly IDbConnectionFactory connectionFactory = new NpgsqlDbConnectionFactory(ConnectionStringProvider.LocalPostgresConnectionString("dvdrental"));
+        private readonly IDbConnectionFactory connectionFactory;
 
-        public ActorsQueryTests()
+        public ActorsQueryTests(DbFixture fixture)
         {
-            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+            connectionFactory = fixture.DbConnectionFactory;
         }
 
         [Fact]
@@ -51,6 +52,22 @@ namespace DvdRentalPostgres.Data.IntegTests.Queries
 
                 var result = await query.Execute();
                 Assert.Equal(5, result.Count);
+            }
+        }
+
+        [Fact]
+        public async Task Execute_WithFirstNameAndLastName_ZeroActorsReturned()
+        {
+            using (var conn = connectionFactory.NewConnection())
+            {
+                var query = new ActorsQuery(conn.BeginTransaction(), CriteriaJoinStrategy.And)
+                {
+                    FirstName = "Adam",
+                    LastName = "Willis"
+                };
+
+                var result = await query.Execute();
+                Assert.Equal(0, result.Count);
             }
         }
     }
