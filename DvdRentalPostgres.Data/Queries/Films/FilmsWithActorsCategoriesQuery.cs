@@ -20,13 +20,7 @@ namespace DvdRentalPostgres.Data.Queries.Films
 
         public override async Task<IReadOnlyList<FilmsWithActorsCategories>> Execute()
         {
-            var query = @"select f.*, a.*, c.* from film f 
-                          inner join film_actor fa on fa.film_id = f.film_id
-                          inner join actor a on a.actor_id = fa.actor_id
-                          inner join film_category fc on fc.film_id = f.film_id
-                          inner join category c on c.category_id = fc.category_id";
-
-            var builder = new WhereClauseBuilder(query);
+            var builder = new WhereClauseBuilder(FilmsSql.SelectFilmsWitActorsAndCategories);
 
             if(!string.IsNullOrEmpty(FilmTitle))
                 builder.AddClause("f.title = @FilmTitle", new { FilmTitle });

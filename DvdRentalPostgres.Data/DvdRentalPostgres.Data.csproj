@@ -11,4 +11,19 @@
     <PackageReference Include="Npgsql" Version="4.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Queries\Films\FilmsSql.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FilmsSql.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Queries\Films\FilmsSql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilmsSql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
