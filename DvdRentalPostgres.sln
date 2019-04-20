@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvdRentalPostgres.Data", "DvdRentalPostgres.Data\DvdRentalPostgres.Data.csproj", "{8EA5177B-1678-4336-B42A-1631FFA23DED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA5177B-1678-4336-B42A-1631FFA23DED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD69B0F6-4971-459E-A8BE-253AEEA8A14D}
+	EndGlobalSection
+EndGlobal
