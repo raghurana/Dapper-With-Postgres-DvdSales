@@ -2,15 +2,15 @@
 using System.Data;
 using Xunit;
 
-namespace DvdRentalPostgres.Data.IntegTests.Commands
+namespace DvdRentalPostgres.Data.IntegTests
 {
     [Collection(DbTestsCollection.Name)]
-    public abstract class BaseDbCommandTests : IDisposable
+    public abstract class BaseDbTests : IDisposable
     {
         private IDbConnection connection;
         protected IDbTransaction OpenTransaction;
 
-        protected BaseDbCommandTests(DbFixture dbFixture)
+        protected BaseDbTests(DbFixture dbFixture)
         {
             connection = dbFixture.DbConnectionFactory.NewConnection();
             OpenTransaction = connection.BeginTransaction();

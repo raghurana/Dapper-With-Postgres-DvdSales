@@ -4,9 +4,9 @@ using DvdRentalPostgres.Data.Commands.Actors;
 using DvdRentalPostgres.Data.Entities;
 using Xunit;
 
-namespace DvdRentalPostgres.Data.IntegTests.Commands.Actors
+namespace DvdRentalPostgres.Data.IntegTests.Commands
 {
-    public class InsertActorsCommandTests : BaseDbCommandTests
+    public class InsertActorsCommandTests : BaseDbTests
     {
         public InsertActorsCommandTests(DbFixture dbFixture) 
             : base(dbFixture)
