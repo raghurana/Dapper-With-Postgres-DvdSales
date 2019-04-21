@@ -2,7 +2,7 @@
 {
     public class FilmWithLanguage : Film
     {
-        public Language Lang { get; }
+        public Language Lang { get; set;  }
 
         public FilmWithLanguage(Film f)
             : base(f)
