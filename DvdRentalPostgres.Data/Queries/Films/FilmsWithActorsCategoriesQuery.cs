@@ -35,11 +35,11 @@ namespace DvdRentalPostgres.Data.Queries.Films
             var result  = builder.Build();
             var records =
                 await Connection.QueryAsync<Film, Actor, Category, FilmWithActorsCategories>(
-                    result.BuiltQuery, 
-                    (f, a, c) => Map(f, a, c, dic1, dic2, dic3),
-                    result.BuiltParams, 
-                    Transaction, 
-                    splitOn: "actor_id, category_id");
+                    sql         : result.BuiltQuery,
+                    param       : result.BuiltParams,
+                    map         : (f, a, c) => Map(f, a, c, dic1, dic2, dic3),
+                    transaction : Transaction, 
+                    splitOn     : "actor_id, category_id");
 
             return records.Distinct().ToList().AsReadOnly();
         }

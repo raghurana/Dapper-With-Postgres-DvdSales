@@ -26,13 +26,12 @@ namespace DvdRentalPostgres.Data.Queries.Films
 
             var result = builder.Build();
             var records =
-                await Connection
-                    .QueryAsync<Film, Language, FilmWithLanguage>(
-                        result.BuiltQuery,
-                        (f, l) => new FilmWithLanguage(f) { Lang = l }, 
-                        result.BuiltParams,
-                        Transaction, 
-                        splitOn: "language_id");
+                await Connection.QueryAsync<Film, Language, FilmWithLanguage>(
+                    sql         : result.BuiltQuery,
+                    param       : result.BuiltParams,
+                    map         : (f, l) => new FilmWithLanguage(f) {Lang = l},
+                    transaction : Transaction,
+                    splitOn     : "language_id");
 
             return records.Distinct().ToList().AsReadOnly();
         }
