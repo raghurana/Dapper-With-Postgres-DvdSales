@@ -44,15 +44,14 @@ namespace DvdRentalPostgres.Data.Queries.Films
             return records.Distinct().ToList().AsReadOnly();
         }
 
-        private FilmsWithActorsCategories Map(
+        private static FilmsWithActorsCategories Map(
             Film f, 
             Actor a, 
             Category c, 
-            Dictionary<int, FilmsWithActorsCategories> dictResult, 
-            Dictionary<int, Actor> dictActors, 
-            Dictionary<int, Category> dictCategories)
+            IDictionary<int, FilmsWithActorsCategories> dictResult, 
+            IDictionary<int, Actor> dictActors, 
+            IDictionary<int, Category> dictCategories)
         {
-
             if (!dictResult.TryGetValue(f.FilmId, out var fwac))
             {
                 fwac = new FilmsWithActorsCategories(f);
