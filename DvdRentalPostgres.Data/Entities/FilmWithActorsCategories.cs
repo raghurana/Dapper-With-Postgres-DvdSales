@@ -2,17 +2,15 @@
 
 namespace DvdRentalPostgres.Data.Entities
 {
-    public class FilmsWithActorsCategories : Film
+    public class FilmWithActorsCategories : Film
     {
         public HashSet<Actor> Actors { get; }
 
         public HashSet<Category> Categories { get; }
 
-        public FilmsWithActorsCategories(Film f)
+        public FilmWithActorsCategories(Film f)
+            : base(f)
         {
-            FilmId      = f.FilmId;
-            Title       = f.Title;
-            Description = f.Description;
             Actors      = new HashSet<Actor>();
             Categories  = new HashSet<Category>();
         }

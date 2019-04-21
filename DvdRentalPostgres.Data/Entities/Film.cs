@@ -8,6 +8,16 @@
 
         public string Description { get; set; }
 
+        public Film()
+        {}
+
+        public Film(Film f)
+        {
+            FilmId      = f.FilmId;
+            Title       = f.Title;
+            Description = f.Description;
+        }
+
         public override string ToString()
         {
             return Title;
